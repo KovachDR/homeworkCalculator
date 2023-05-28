@@ -20,28 +20,33 @@ public class Controller {
     @GetMapping("/plus")
     public String plus(@RequestParam("num1") double num1,
                        @RequestParam("num2") double num2) {
-        return calculatorServiceImp.plus(num1,num2);
+        double result = calculatorServiceImp.plus(num1,num2);
+        return buildAnswer(num1,num2,result,'+');
     }
 
     @GetMapping("/minus")
     public String minus(@RequestParam("num1") double num1,
                        @RequestParam("num2") double num2) {
-        return calculatorServiceImp.minus(num1,num2);
+        double result = calculatorServiceImp.minus(num1,num2);
+        return buildAnswer(num1,num2,result,'-');
     }
 
     @GetMapping("/multiply")
     public String multiply(@RequestParam("num1") double num1,
                        @RequestParam("num2") double num2) {
-        return calculatorServiceImp.multiply(num1,num2);
+        double result = calculatorServiceImp.multiply(num1,num2);
+        return buildAnswer(num1,num2,result,'*');
     }
 
     @GetMapping("/divide")
     public String divide(@RequestParam("num1") double num1,
                        @RequestParam("num2") double num2) {
-        return calculatorServiceImp.divide(num1,num2);
+     double result = calculatorServiceImp.divide(num1,num2);
+     return buildAnswer(num1,num2,result,'/');
     }
-    @ExceptionHandler(RuntimeException.class)
-    public String errorDivideByZero(ArithmeticException arithmeticException){
-        return "На ноль делить нельзя";
+
+    private static String buildAnswer(double num1, double num2, double result, char c) {
+        return String.format("%f %c %f = %f",num1,c,num2,result);
     }
+
 }

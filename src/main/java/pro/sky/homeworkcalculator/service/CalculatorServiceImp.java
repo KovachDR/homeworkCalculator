@@ -1,34 +1,31 @@
 package pro.sky.homeworkcalculator.service;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
+import pro.sky.homeworkcalculator.exceptions.ZeroDivideException;
 
 @Service
 public class CalculatorServiceImp implements CalculatorService{
     @Override
-    public String plus(@RequestParam("num1") double num1,
+    public double plus(@RequestParam("num1") double num1,
                        @RequestParam("num2") double num2) {
-        double result = num1 + num2;
-        return "Результат вычислений: " + num1 + " + " + num2 + " = " + result;
+        return num1 + num2;
     }
 
     @Override
-    public String minus(double num1, double num2) {
-        double result = num1 - num2;
-        return "Результат вычислений: " + num1 + " - " + num2 + " = " + result;
+    public double minus(double num1, double num2) {
+        return num1 - num2;
     }
 
     @Override
-    public String multiply(double num1, double num2) {
-        double result = num1 * num2;
-        return "Результат вычислений: " + num1 + " * " + num2 + " = " + result;
+    public double multiply(double num1, double num2) {
+        return num1 * num2;
     }
 
     @Override
-    public String divide(double num1, double num2) {
+    public double divide(double num1, double num2) {
     if (num2 != 0){
-        double result = num1 / num2;
-        return "Результат вычислений: " + num1 + " / " + num2 + " = " + result;
-    }throw new ArithmeticException("На ноль делить нельзя");
+        return num1 / num2;
+    }throw new ZeroDivideException();
     }
 
 
